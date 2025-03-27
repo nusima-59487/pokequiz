@@ -3,7 +3,7 @@
 Many thanks!
 
 ### Copyright Notice
-Images are copyrighted by the Pokemon company and its affiliates; Neither me or Purukitto do not own any of the images
+Images are copyrighted by the Pokemon company and its affiliates; Neither me or Purukitto own any of the images
 
 ---
 ### Pokequiz
