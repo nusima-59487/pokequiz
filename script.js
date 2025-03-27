@@ -51,3 +51,21 @@ function setHighScore (score) {
     localStorage.setItem('highscore', score);
     return true; 
 }
+
+
+// Button functions mapping
+function btnUserConfirm() {
+
+}
+
+function btnUserGiveup () {
+
+}
+
+function btnUserSkip () {
+
+}
+
+function btnRetry () {
+
+}
