@@ -44,4 +44,15 @@
     <a href="https://github.com/nusima-59487/pokequiz">Go to source code</a>
     
 </body>
+<script>
+    // init game
+    var g1; 
+    async function e () {
+        d = await fetchData(); 
+        g1 = new game(d);
+        g1.nextEntry();
+    }
+    
+    e(); 
+</script>
 </html>
