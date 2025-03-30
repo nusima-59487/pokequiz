@@ -30,7 +30,14 @@ class game {
         this.htmlGiveupDiv = document.getElementById("usergiveupdiv");
 
         this.stats = {
-            // todo
+            score: 0,
+            highScore: 0,
+            consecutive: 0, 
+            highestConsecutive: 0,
+            totalEntriesGuessed: 0,
+            totalEntriesGuessedCorrect: 0,
+            totalEntriesSkipped: 0, 
+            totalEntriesGuessedWrong: 0,
         }
     }
 
@@ -56,7 +63,7 @@ class game {
         this.htmlImg.src = entImg;
 
         // show score and reset input box
-        this.htmlScore.innerText = this.score;  
+        this.htmlScore.innerText = this.stats.score;  
         this.htmlHigh.innerText = this.getHighScore();  
         this.htmlInput.value = ""; 
         this.htmlInput.focus(); // focus on input box
@@ -76,7 +83,7 @@ class game {
         let entName = this.entry["name"]["english"].toLowerCase();
 
         if (input == entName) {
-            this.score++;
+            this.stats.score++;
             let a = this.setHighScore(score);
 
             this.nextEntry();
@@ -110,8 +117,8 @@ class game {
         this.htmlInputDiv.hidden = false;
         this.htmlGiveupDiv.hidden = true;
         this.htmlName.innerHTML = "";
-        this.score = 0;
-        this.htmlScore.innerText = this.score;    
+        this.stats.score = 0;
+        this.htmlScore.innerText = this.stats.score;    
 
         return this.nextEntry();
     }
@@ -135,10 +142,10 @@ class game {
      */
     setHighScore () {
         let currentHighScore = this.getHighScore();
-        if (this.score < currentHighScore) {
+        if (this.stats.score < currentHighScore) {
             return false;
         }
-        localStorage.setItem('highscore', this.score);
+        localStorage.setItem('highscore', this.stats.score);
         return true; 
     }
 
