@@ -20,13 +20,15 @@ class game {
         this.isGameOver = false;
 
         // might use constructor params
-        this.htmlImg = document.getElementById("mainimg");
-        this.htmlName = document.getElementById("pokemonname");
-        this.htmlInput = document.getElementById("userinput");
-        this.htmlScore = document.getElementById("score");
-        this.htmlHigh = document.getElementById("high");
-        this.htmlInputDiv = document.getElementById("userinputdiv");
-        this.htmlGiveupDiv = document.getElementById("usergiveupdiv");
+        this.htmls = {
+            img: document.getElementById("mainimg"), 
+            name: document.getElementById("pokemonname"), 
+            input: document.getElementById("userinput"), 
+            score: document.getElementById("score"), 
+            high: document.getElementById("high"), 
+            inputDiv: document.getElementById("userinputdiv"), 
+            giveupDiv: document.getElementById("usergiveupdiv") 
+        }
 
         this.stats = {
             score: 0,
@@ -59,13 +61,13 @@ class game {
         if (this.isGameOver) return; // if gameover, do nothing    
         this.entry = this.random();
         let entImg = this.entry["image"]["hires"];
-        this.htmlImg.src = entImg;
+        this.htmls.img.src = entImg;
 
         // show score and reset input box
-        this.htmlScore.innerText = this.stats.score;  
-        this.htmlHigh.innerText = this.getHighScore();  
-        this.htmlInput.value = ""; 
-        this.htmlInput.focus(); // focus on input box
+        this.htmls.score.innerText = this.stats.score;  
+        this.htmls.high.innerText = this.getHighScore();  
+        this.htmls.input.value = ""; 
+        this.htmls.input.focus(); // focus on input box
 
         // plz dont
         console.log(this.entry["name"]["english"]);
@@ -78,7 +80,7 @@ class game {
      */
     checkAnswer() {
         if (this.isGameOver) return; // if gameover, do nothing
-        let input = this.htmlInput.value.toLowerCase();
+        let input = this.htmls.input.value.toLowerCase();
         let entName = this.entry["name"]["english"].toLowerCase();
 
         if (input == entName) {
@@ -98,9 +100,9 @@ class game {
     endgame () {
         let entName = this.entry["name"]["english"];
         this.isGameOver = true; 
-        this.htmlInputDiv.hidden = true;
-        this.htmlGiveupDiv.hidden = false;
-        this.htmlName.innerText = entName;
+        this.htmls.inputDiv.hidden = true;
+        this.htmls.giveupDiv.hidden = false;
+        this.htmls.name.innerText = entName;
         return entName;
     }
 
@@ -113,11 +115,11 @@ class game {
 
     retry () {
         this.isGameOver = false; 
-        this.htmlInputDiv.hidden = false;
-        this.htmlGiveupDiv.hidden = true;
-        this.htmlName.innerHTML = "";
+        this.htmls.inputDiv.hidden = false;
+        this.htmls.giveupDiv.hidden = true;
+        this.htmls.name.innerHTML = "";
         this.stats.score = 0;
-        this.htmlScore.innerText = this.stats.score;    
+        this.htmls.score.innerText = this.stats.score;    
 
         return this.nextEntry();
     }
