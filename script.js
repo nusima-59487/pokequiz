@@ -15,7 +15,6 @@ async function fetchData() {
 
 class game {
     constructor (data) {
-        this.score = 0; 
         this.data = data; // data from the fetch
         this.entry = null; 
         this.isGameOver = false;
