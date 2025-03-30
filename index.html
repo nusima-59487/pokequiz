@@ -19,9 +19,16 @@
                 <span>Highscore: </span>
                 <span id="high">0</span>
             </div>
+            <div>
+                <span>Consecutive: </span>
+                <span id="consecutive">0</span>
+            </div>
+            <div><span>
+                Enter to confirm, Escape to skip
+            </span></div>
         </div>
         <div id="imagediv">
-            <img id="mainimg" src="https://archives.bulbagarden.net/media/upload/1/14/0460Abomasnow.png" alt="You have bad signal! Please refresh the page">
+            <img id="mainimg" src="" alt="If image don't load, please check signal strength and/or enable javascript">
         </div>
         <div id="userinputdiv">
             <div>
@@ -40,6 +47,7 @@
             <button id="retry" onclick="btnRetry()">Try again</button>
         </div>
     </div>
+    <span id="saveindicator" hidden>Saving stats...</span>
 
     <a href="https://github.com/nusima-59487/pokequiz">Go to source code</a>
     
@@ -50,6 +58,7 @@
     async function e () {
         d = await fetchData(); 
         g1 = new game(d);
+        g1.readStats(); 
         g1.nextEntry();
     }
     
