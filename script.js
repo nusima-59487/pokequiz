@@ -109,7 +109,7 @@ class game {
      * @todo
      */
     skipEntry () {
-        // TODO
+        this.nextEntry()
     }
 
     retry () {
