@@ -14,10 +14,11 @@ async function fetchData() {
 }; 
 
 class game {
-    constructor (data) {
+    constructor (data, localStorageKey = "gamestats") {
         this.data = data; // data from the fetch
         this.entry = null; 
         this.isGameOver = false;
+        this.LOCAL_STORAGE_KEY = localStorageKey; 
 
         // might use constructor params
         this.htmls = {
@@ -83,12 +84,19 @@ class game {
         let input = this.htmls.input.value.toLowerCase();
         let entName = this.entry["name"]["english"].toLowerCase();
 
+        this.stats.totalEntriesGuessed++;
         if (input == entName) {
             this.stats.score++;
-            let a = this.setHighScore(score);
+            this.stats.consecutive++;
+            this.stats.totalEntriesGuessedCorrect++;
+            if (this.stats.score > this.stats.highScore) 
+                this.stats.highScore = this.stats.score;
+            if (this.stats.consecutive > this.stats.highestConsecutive)
+                this.stats.highestConsecutive = this.stats.consecutive;
 
             this.nextEntry();
         } else {
+            this.stats.totalEntriesGuessedWrong++;
             this.endgame(); 
         }
     }
@@ -99,17 +107,18 @@ class game {
      */
     endgame () {
         let entName = this.entry["name"]["english"];
-        this.isGameOver = true; 
+        this.isGameOver = true;
         this.htmls.inputDiv.hidden = true;
         this.htmls.giveupDiv.hidden = false;
         this.htmls.name.innerText = entName;
+
+        this.writeStats(); 
         return entName;
     }
 
-    /**
-     * @todo
-     */
     skipEntry () {
+        this.stats.totalEntriesSkipped++;
+        this.stats.consecutive = 0;
         this.nextEntry()
     }
 
@@ -119,37 +128,37 @@ class game {
         this.htmls.giveupDiv.hidden = true;
         this.htmls.name.innerHTML = "";
         this.stats.score = 0;
+        this.stats.consecutive = 0;
         this.htmls.score.innerText = this.stats.score;    
 
         return this.nextEntry();
     }
 
     /**
-     * Get the high score from `localStorage`, set 0 if null
-     * @returns {number} the high score
+     * Get the `stats` object from `localStorage`, init if null
+     * @todo
      */
-    getHighScore () {
-        let s = localStorage.getItem('highscore')
-        if (s == null) {
-            localStorage.setItem('highscore', 0);
-            return 0;
-        }
-        return s;
+    readStats () {
+        let s = localStorage.getItem(this.LOCAL_STORAGE_KEY); 
+        if (s == null) return; 
+        this.stats = JSON.parse(s);
+        this.stats.score = 0; 
+        this.stats.consecutive = 0; 
+        return; 
     }
-
+    
     /**
-     * Set the high score to `localStorage`
-     * @returns {boolean} true if successful, false if score lower than current high score
+     * Update the `stats` object to `localStorage`
      */
-    setHighScore () {
-        let currentHighScore = this.getHighScore();
-        if (this.stats.score < currentHighScore) {
-            return false;
-        }
-        localStorage.setItem('highscore', this.stats.score);
-        return true; 
+    writeStats () {
+        this.htmls.saveIndicator.hidden = false;
+        // fake loading
+        setTimeout(() => {
+            this.htmls.saveIndicator.hidden = true;
+        }, 473);
+        localStorage.setItem(this.LOCAL_STORAGE_KEY, JSON.stringify(this.stats));
+        return;
     }
-
 }
 
 
