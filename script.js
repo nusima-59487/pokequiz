@@ -26,9 +26,11 @@ class game {
             name: document.getElementById("pokemonname"), 
             input: document.getElementById("userinput"), 
             score: document.getElementById("score"), 
-            high: document.getElementById("high"), 
+            highScore: document.getElementById("high"), 
+            consecutive: document.getElementById("consecutive"),
             inputDiv: document.getElementById("userinputdiv"), 
-            giveupDiv: document.getElementById("usergiveupdiv") 
+            giveupDiv: document.getElementById("usergiveupdiv"), 
+            saveIndicator: document.getElementById("saveindicator"),
         }
 
         this.stats = {
@@ -66,7 +68,8 @@ class game {
 
         // show score and reset input box
         this.htmls.score.innerText = this.stats.score;  
-        this.htmls.high.innerText = this.getHighScore();  
+        this.htmls.highScore.innerText = this.stats.highScore;  
+        this.htmls.consecutive.innerText = this.stats.consecutive;
         this.htmls.input.value = ""; 
         this.htmls.input.focus(); // focus on input box
 
