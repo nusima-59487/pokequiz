@@ -74,7 +74,7 @@ class game {
         this.htmls.input.focus(); // focus on input box
 
         // plz dont
-        // console.log(this.entry["name"]["english"]);
+        alert(this.entry["name"]["english"]);
     }
 
     /**
