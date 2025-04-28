@@ -37,10 +37,18 @@ button {
     margin-bottom: 4px;
     margin-right: 6px;
     font-size: 1.1em;
+    background-color: gainsboro;
+    border: 1px solid gray;
+    border-radius: 3px;
+    box-sizing: border-box;
 }
 input:focus {
-    border-width: 0 0 1px 0; 
     border-color: cadetblue;
+    outline-width: 0;
+}
+button:focus {
+    border-color: black;
+    background-color: rgb(255, 242, 171);
     outline-width: 0;
 }
 
