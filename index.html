@@ -31,7 +31,7 @@
             <img id="mainimg" src="" alt="If image don't load, please check signal strength and/or enable javascript">
         </div>
         <div id="userinputdiv">
-            <div>
+            <div id="ddd">
                 <input type="text" autofocus placeholder="Name..." id="userinput">
                 <button id="userconfirm" onclick="btnUserConfirm()">Confirm</button>
             </div>
@@ -46,10 +46,15 @@
             <h5 id="pokemonname">Abomasnow</h5>
             <button id="retry" onclick="btnRetry()">Try again</button>
         </div>
+        <div id="saveindicator" hidden>
+            <span>Saving stats...<br></span>
+        </div>
     </div>
-    <span id="saveindicator" hidden>Saving stats...<br></span>
-
-    <a href="https://github.com/nusima-59487/pokequiz">Go to source code</a>
+    <footer>
+        <p>Made by nusima-59487 ▪ 
+            <a href="https://github.com/nusima-59487/pokequiz">Go to source code</a>
+        </p>
+    </footer>
     
 </body>
 <script>
